@@ -50,25 +50,7 @@ namespace api_report.Controller
                         {
                             reportDocument.Load(reportPath);
 
-                            foreach (ParameterFieldDefinition parameterField in reportDocument.DataDefinition.ParameterFields)
-                            {
-                                Console.WriteLine($"Parâmetro: {parameterField.Name}");
-                                Console.WriteLine($"Tipo de dado: {parameterField.ParameterValueKind}");
-
-                                // Verificar se o parâmetro está sendo usado no relatório
-                                if (parameterField.CurrentValues.Count > 0)
-                                {
-                                    Console.WriteLine("Parâmetro utilizado no relatório:");
-                                    foreach (var currentValue in parameterField.CurrentValues)
-                                    {
-                                        Console.WriteLine($"- Valor: {currentValue}");
-                                    }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Parâmetro não utilizado no relatório.");
-                                }
-                            }
+                            
 
                             // Verificar parâmetros faltantes
                             var missingParameters = reportDocument.DataDefinition.ParameterFields
@@ -77,18 +59,7 @@ namespace api_report.Controller
                                 .Select(pf => pf.Name)
                                 .ToList();
 
-                            if (missingParameters.Any())
-                            {
-                                Console.WriteLine("Parâmetros não preenchidos:");
-                                foreach (var param in missingParameters)
-                                {
-                                    Console.WriteLine($"- {param}");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Todos os parâmetros estão preenchidos.");
-                            }
+                          
 
                             reportDocument.SetDataSource(reportData);
 
